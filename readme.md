@@ -5,6 +5,8 @@
 Your task is to analyze and refactor the given code to improve its encapsulation, adherence to the Law of Demeter, avoidance of God objects, applying "ask-don't-tell" and elimination of code duplication (DRY). 
 Below are the specific instructions to guide your refactoring process:
 
+**Note: For this exercise leave the `cout<<` statments where they are**
+
 ## 1. Encapsulation
 
 Ensure that each class encapsulates its data and provides controlled access through methods. No data members should be directly accessible outside the class.
