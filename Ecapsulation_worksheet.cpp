@@ -38,6 +38,20 @@ public:
     Weapon* getWeapon() const {
         return { currentWeapon };
     }
+    std::string getWeaponName() const
+    {
+        return currentWeapon->getName();
+    }
+
+    int getWeaponDamage()
+    {
+        return currentWeapon->getDamage();
+    }
+
+    bool isWeaponEquipped()
+    {
+        return currentWeapon != nullptr;
+    }
 
     std::string getName() const { return name; }
     
@@ -88,16 +102,13 @@ public:
 
         // Player and enemy health checks
         while (player.getHealth() > 0 && enemy.getHealth() > 0) {
-            Weapon* playerWeapon = player.getWeapon();
-            Weapon * enemyWeapon = enemy.getWeapon();
-
-            if (playerWeapon != nullptr && enemyWeapon != nullptr) {
-                std::cout << player.getName() << " attacks " << enemy.getName() << " with " << playerWeapon->getName() << "\n";
-				enemy.takeDamage(playerWeapon->getDamage() * player.strength);
+            if (player.isWeaponEquipped() && enemy.isWeaponEquipped()) {
+                std::cout << player.getName() << " attacks " << enemy.getName() << " with " << player.getWeaponName() << "\n";
+				enemy.takeDamage(player.getWeaponDamage() * player.strength);
                 std::cout << enemy.getName() << " health: " << enemy.getHealth() << "\n";
 
-                std::cout << enemy.getName() << " attacks " << player.getName() << " with " << enemyWeapon->getName() << "\n";
-                player.takeDamage(enemyWeapon->getDamage() * enemy.strength);
+                std::cout << enemy.getName() << " attacks " << player.getName() << " with " << enemy.getWeaponName() << "\n";
+                player.takeDamage(enemy.getWeaponDamage() * enemy.strength);
                 std::cout << player.getName() << " health: " << player.getHealth() << "\n";
             }
             else {
