@@ -26,10 +26,9 @@ protected:
     std::string name;
     int health;
     Weapon* currentWeapon;
+    int strength; // multiplier for weapon damage
 
 public:
-    int strength; // multiplier for weapon damage
-    
 	Character(const std::string& characterName, int characterHealth, int characterStrength)
         : name(characterName), health(characterHealth), 
           strength(characterStrength), currentWeapon(nullptr) {}
@@ -77,13 +76,6 @@ public:
     {
         return health > 0;
     }
-
-    /*void takeDamage(int damage) {
-        health -= damage;
-        if (health < 0) health = 0;
-        
-        
-    }*/
 
     void takeDamage(Character& damagingChar)
     {
@@ -155,7 +147,7 @@ public:
             std::cout << player.getName() << " has been defeated.\n";
             return 1;
         }
-        else if (!player.isAlive()) {
+        else if (!enemy.isAlive()) {
             std::cout << enemy.getName() << " has been defeated.\n";
             return 0;
         }
