@@ -78,11 +78,21 @@ public:
         return health > 0;
     }
 
-    void takeDamage(int damage) {
+    /*void takeDamage(int damage) {
         health -= damage;
         if (health < 0) health = 0;
         
-        std::cout << name << "take damage " << damage << "\n";
+        
+    }*/
+
+    void takeDamage(Character& damagingChar)
+    {
+        health -= damagingChar.getWeaponDamage() * damagingChar.strength;
+        if (health < 0)
+        {
+            health = 0;
+        }
+        std::cout << name << "take damage " << damagingChar.getWeaponDamage() * damagingChar.strength << "\n";
     }
 
 };
@@ -123,11 +133,11 @@ public:
         while (player.isAlive() && enemy.isAlive()) {
             if (player.isWeaponEquipped() && enemy.isWeaponEquipped()) {
                 std::cout << player.getName() << " attacks " << enemy.getName() << " with " << player.getWeaponName() << "\n";
-				enemy.takeDamage(player.getWeaponDamage() * player.strength);
+                enemy.takeDamage(player);
                 std::cout << enemy.getName() << " health: " << enemy.getHealth() << "\n";
 
                 std::cout << enemy.getName() << " attacks " << player.getName() << " with " << enemy.getWeaponName() << "\n";
-                player.takeDamage(enemy.getWeaponDamage() * enemy.strength);
+                player.takeDamage(enemy);
                 std::cout << player.getName() << " health: " << player.getHealth() << "\n";
             }
             else {
