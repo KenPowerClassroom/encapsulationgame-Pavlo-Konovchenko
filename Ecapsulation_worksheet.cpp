@@ -151,11 +151,11 @@ public:
 
 
         
-        if (player.getHealth() <= 0) {
+        if (!player.isAlive()) {
             std::cout << player.getName() << " has been defeated.\n";
             return 1;
         }
-        else if (enemy.getHealth() <= 0) {
+        else if (!player.isAlive()) {
             std::cout << enemy.getName() << " has been defeated.\n";
             return 0;
         }
