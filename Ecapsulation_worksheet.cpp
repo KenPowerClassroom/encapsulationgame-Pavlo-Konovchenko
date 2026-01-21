@@ -59,6 +59,11 @@ public:
 
     void setHealth(int newHealth) { health = newHealth; }
 
+    bool isAlive()
+    {
+        return health > 0;
+    }
+
     void takeDamage(int damage) {
         health -= damage;
         if (health < 0) health = 0;
@@ -101,7 +106,7 @@ public:
         std::cout << "Game started: " << player.getName() << " vs " << enemy.getName() << "\n";
 
         // Player and enemy health checks
-        while (player.getHealth() > 0 && enemy.getHealth() > 0) {
+        while (player.isAlive() && enemy.isAlive()) {
             if (player.isWeaponEquipped() && enemy.isWeaponEquipped()) {
                 std::cout << player.getName() << " attacks " << enemy.getName() << " with " << player.getWeaponName() << "\n";
 				enemy.takeDamage(player.getWeaponDamage() * player.strength);
