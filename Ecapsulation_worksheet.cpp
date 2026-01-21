@@ -63,6 +63,16 @@ public:
 
     void setHealth(int newHealth) { health = newHealth; }
 
+    void heal(int amountOfHeal)
+    {
+        if (health > 0)
+        {
+            health += amountOfHeal;
+            std::cout << "Player healed by " << amountOfHeal << " points.\n";
+        }
+        
+    }
+
     bool isAlive()
     {
         return health > 0;
@@ -167,14 +177,7 @@ public:
 
     void randomlyHealPlayer() {
         int healAmount = std::rand() % 50 + 1; // heal between 1 and 50 point
-        healPlayer(healAmount);
-    }
-
-    void healPlayer(int amount) {
-        if (player.getHealth() > 0) {
-            player.setHealth(player.getHealth() + amount);
-            std::cout << "Player healed by " << amount << " points.\n";
-        }
+        player.heal(healAmount);
     }
 };
 
