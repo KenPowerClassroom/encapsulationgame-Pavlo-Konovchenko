@@ -25,6 +25,7 @@ class Character {
 protected:
     std::string name;
     int health;
+    Weapon* currentWeapon;
 
 public:
     int strength; // multiplier for weapon damage
@@ -32,8 +33,6 @@ public:
 	Character(const std::string& characterName, int characterHealth, int characterStrength)
         : name(characterName), health(characterHealth), 
           strength(characterStrength), currentWeapon(nullptr) {}
-
-    Weapon* currentWeapon;
     
     Weapon* getWeapon() const {
         return { currentWeapon };
@@ -51,6 +50,11 @@ public:
     bool isWeaponEquipped()
     {
         return currentWeapon != nullptr;
+    }
+
+    void equipWeapon(Weapon& newWeapon)
+    {
+        currentWeapon = &newWeapon;
     }
 
     std::string getName() const { return name; }
@@ -139,13 +143,13 @@ public:
 
     void equipPlayerWeapon(int weaponIndex) {
         if (weaponIndex >= 0 && weaponIndex < weapons.size()) {
-            player.currentWeapon=&weapons[weaponIndex];
+            player.equipWeapon(weapons[weaponIndex]);
         }
     }
 
     void equipEnemyWeapon(int weaponIndex) {
         if (weaponIndex >= 0 && weaponIndex < weapons.size()) {
-            enemy.currentWeapon = &weapons[weaponIndex];
+            enemy.equipWeapon(weapons[weaponIndex]);
         }
     }
 
@@ -157,7 +161,7 @@ public:
         }
         int randomIndex = std::rand() % weapons.size();
         Weapon* selectedWeapon = &weapons[randomIndex];
-        character.currentWeapon = selectedWeapon;
+        character.equipWeapon(*selectedWeapon);
         return selectedWeapon;
     }
 
